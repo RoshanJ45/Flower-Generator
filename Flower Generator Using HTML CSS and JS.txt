@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+body {
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+height: 100vh;
+background: #e0f7fa;
+font-family: Arial, sans-serif;
+}
+.flower {
+position: relative;
+width: 200px;
+height: 200px;
+margin-bottom: 20px;
+}
+.petal {
+position: absolute;
+width: 60px;
+height: 100px;
+background-color: #ff4081;
+border-radius: 30px;
+transform-origin: 50% 100%;
+margin-left: 67px;
+}
+.center {
+position: absolute;
+background-color: #ffeb3b;
+border-radius: 50%;
+width: 40px;
+height: 40px;
+left: 50%;
+top: 50%;
+transform: translate(-50%, -50%);
+}
+.controls {
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+input,
+button {
+margin: 5px;
+padding: 10px;
+border-radius: 5px;
+border: 1px solid #ccc;
+}
+button {
+cursor: pointer;
+background-color: #00796b;
+color: white;
+}
+</style>
+</head>
+<body>
+<div class="flower" id="flower"></div>
+<div class="controls">
+<input type="number" id="petalCount" placeholder="petals" min="3" max="12">
+<input type="color" id="petalColor" value="#ff4081">
+<button onclick="generateFlower()">Generate</button>
+</div>
+<script>
+function generateFlower() {
+const flower = document.getElementById('flower');
+flower.innerHTML = '';
+const petalCount = parseInt(document.getElementById('petalCount').value) || 6;
+const petalColor = document.getElementById('petalColor').value;
+for (let i = 0; i < petalCount; i++) {
+const petal = document.createElement('div');
+petal.className = 'petal';
+petal.style.backgroundColor = petalColor;
+petal.style.transform = `rotate(${(360 / petalCount) * i}deg)`;
+flower.appendChild(petal);
+}
+const center = document.createElement('div');
+center.className = 'center';
+flower.appendChild(center);
+}
+window.onload = generateFlower;
+</script>
+</body>
+</html>
